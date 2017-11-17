@@ -4,7 +4,10 @@ const numbersInCalc = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 let lastNumber = null
 let operation = null
 const saveState = []
+const internalBoardState = []
 const numberIds = ['calc1', 'calc2', 'calc3', 'calc4', 'calc5', 'calc6', 'calc7', 'calc8', 'calc9']
+
+const getCurrentlySelectedNumber = () => lastNumber
 
 const onPlayCard = function () {
   resetBoard()
@@ -63,12 +66,20 @@ const setCalcBoard = function () {
     $('#' + numberIds[i]).text(numbersInCalc[Math.floor(Math.random() * numbersInCalc.length)])
   }
   saveStateOfCalc()
+  saveInteralBoardState()
 }
 
 const saveStateOfCalc = function () {
   saveState.length = 0
   for (let i = 0; i < numberIds.length; i++) {
     saveState[i] = $('#' + numberIds[i]).text()
+  }
+}
+
+const saveInteralBoardState = function () {
+  internalBoardState.length = 0
+  for (let i = 0; i < numberIds.length; i++) {
+    internalBoardState[i] = $('#' + numberIds[i]).text()
   }
 }
 
@@ -118,5 +129,6 @@ const initCalcLogic = function () {
 }
 
 module.exports = {
-  initCalcLogic
+  initCalcLogic,
+  getCurrentlySelectedNumber
 }

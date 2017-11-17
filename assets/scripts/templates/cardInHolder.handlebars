@@ -1,7 +1,8 @@
 {{#each cards}}
-<div class="card col-6 p-1">
+<div class="playingCard card col-6 p-1" data-cost="{{cost}}">
   <div class="card-body p-1">
-    <h4 class="card-title">{{name}}</h4>
+    <h4 class="card-title">{{cost}}</h4>
+    <p class="card-text text-center m-0" style="background-color: #CCCCCC">{{name}}</p>
     <p class="card-text">{{description}}</p>
   </div>
 </div>

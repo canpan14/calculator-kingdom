@@ -1,123 +1,71 @@
 'use strict'
 
-const numbersInCalc = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-let lastNumber = null
-let operation = null
-const saveState = []
-const internalBoardState = []
-const numberIds = ['calc1', 'calc2', 'calc3', 'calc4', 'calc5', 'calc6', 'calc7', 'calc8', 'calc9']
-
-const getCurrentlySelectedNumber = () => lastNumber
+const ui = require('./ui')
+const calcState = require('./calcState')
 
 const onPlayCard = function () {
   resetBoard()
+  calcState.saveStateOfCalc()
 }
 
 const onClearButton = function () {
-  removeClickedCSS()
-  $('.number').attr('disabled', false)
-  $('.operation').attr('disabled', true)
-  lastNumber = null
-  operation = null
-  loadSaveState()
+  calcState.resetToPriorSaveState()
 }
 
 const onOperationButton = function (event) {
   event.preventDefault()
-  if (lastNumber !== null) {
-    operation = $(event.target).text()
+  if (calcState.getCurrentlySelectedNumber() !== null) {
+    calcState.setCurrentOperation($(event.target))
   }
 }
 
 const onNumberButton = function (event) {
   event.preventDefault()
   if (resetIfSameNumberClicked(event.target)) return
-  if (operation !== null) {
-    $('.operation').attr('disabled', true)
-    switch (operation) {
+  if (calcState.getCurrentlySelectedOperation() !== null) {
+    switch (calcState.getCurrentlySelectedOperation()) {
       case '+':
-        combineNumbers($(event.target), parseInt(lastNumber.text()) + parseInt($(event.target).text()))
+        ui.combineNumbers($(event.target),
+          calcState.getCurrentlySelectedNumber(),
+          +calcState.getCurrentlySelectedNumber().text() + +calcState.getNumberAtId($(event.target).attr('id')))
         break
       case '-':
-        combineNumbers($(event.target), parseInt(lastNumber.text()) - parseInt($(event.target).text()))
+        ui.combineNumbers($(event.target),
+          calcState.getCurrentlySelectedNumber(),
+          +calcState.getCurrentlySelectedNumber().text() - +calcState.getNumberAtId($(event.target).attr('id')))
         break
       case 'X':
-        combineNumbers($(event.target), parseInt(lastNumber.text()) * parseInt($(event.target).text()))
+        ui.combineNumbers($(event.target),
+          calcState.getCurrentlySelectedNumber(),
+          +calcState.getCurrentlySelectedNumber().text() * +calcState.getNumberAtId($(event.target).attr('id')))
         break
     }
-    lastNumber = null
-    operation = null
+    calcState.setCurrentOperation(null)
+    calcState.saveInteralBoardState()
+    calcState.setCurrentNumber($(event.target))
+    ui.numberClicked($(event.target))
   } else {
-    $('.operation').attr('disabled', false)
-    lastNumber = $(event.target)
-    removeClickedCSS()
-    addClickedCSS(lastNumber)
+    calcState.setCurrentNumber($(event.target))
+    ui.numberClicked(calcState.getCurrentlySelectedNumber())
   }
-}
-
-const loadSaveState = function () {
-  for (let i = 0; i < numberIds.length; i++) {
-    $('#' + numberIds[i]).text(saveState[i])
-  }
-}
-
-const setCalcBoard = function () {
-  for (let i = 0; i < numberIds.length; i++) {
-    $('#' + numberIds[i]).text(numbersInCalc[Math.floor(Math.random() * numbersInCalc.length)])
-  }
-  saveStateOfCalc()
-  saveInteralBoardState()
-}
-
-const saveStateOfCalc = function () {
-  saveState.length = 0
-  for (let i = 0; i < numberIds.length; i++) {
-    saveState[i] = $('#' + numberIds[i]).text()
-  }
-}
-
-const saveInteralBoardState = function () {
-  internalBoardState.length = 0
-  for (let i = 0; i < numberIds.length; i++) {
-    internalBoardState[i] = $('#' + numberIds[i]).text()
-  }
-}
-
-const combineNumbers = function (numberToCombineInto, result) {
-  lastNumber.attr('disabled', true)
-  lastNumber.text('- -')
-  numberToCombineInto.text(result)
+  calcState.saveInteralBoardState()
 }
 
 const resetIfSameNumberClicked = function (numberClicked) {
-  if (lastNumber === null) return false
-  if (lastNumber.attr('id') === numberClicked.id) {
+  if (calcState.getCurrentlySelectedNumber() === null) return false
+  if (calcState.getCurrentlySelectedNumber().attr('id') === numberClicked.id) {
+    calcState.clearSelectedValues()
+    ui.removeClickedCSS()
     return true
   }
   return false
 }
 
-const addClickedCSS = function (numberClicked) {
-  numberClicked.addClass('clicked')
-}
-
-const removeClickedCSS = function () {
-  for (let i = 0; i < numberIds.length; i++) {
-    $('#' + numberIds[i]).removeClass('clicked')
-  }
-}
-
 const resetBoard = function () {
-  removeClickedCSS()
-  setCalcBoard()
-  $('.operation').attr('disabled', true)
-  $('.number').attr('disabled', false)
-  lastNumber = null
-  operation = null
+  calcState.newCalcBoard()
 }
 
 const registerHandlers = function () {
-  $('#playCard').on('click', onPlayCard)
   $('.reset-calc').on('click', onClearButton)
   $('.operation').on('click', onOperationButton)
   $('.number').on('click', onNumberButton)
@@ -125,10 +73,9 @@ const registerHandlers = function () {
 
 const initCalcLogic = function () {
   registerHandlers()
-  setCalcBoard()
+  calcState.newCalcBoard()
 }
 
 module.exports = {
-  initCalcLogic,
-  getCurrentlySelectedNumber
+  initCalcLogic
 }

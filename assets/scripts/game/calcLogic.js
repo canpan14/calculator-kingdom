@@ -3,11 +3,6 @@
 const ui = require('./ui')
 const calcState = require('./calcState')
 
-const onPlayCard = function () {
-  resetBoard()
-  calcState.saveStateOfCalc()
-}
-
 const onClearButton = function () {
   calcState.resetToPriorSaveState()
 }

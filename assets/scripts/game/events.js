@@ -4,14 +4,12 @@ const api = require('./api')
 const ui = require('./ui')
 const calcLogic = require('./calcLogic')
 const calcState = require('./calcState')
-const cardLogic = require('./cardLogic')
 const gameLogic = require('./gameLogic')
 
 const initializeGamePage = function () {
   ui.initGameView()
   calcLogic.initCalcLogic()
-  api.getCards()
-    .then(cardLogic.initCards)
+  gameLogic.newGame()
     .then(() => {
       $('.playingCard').on('click', (event) => {
         if (gameLogic.playCard(event, calcState.getCurrentlySelectedNumber())) {
@@ -21,6 +19,14 @@ const initializeGamePage = function () {
             console.log('Played all the cards! End turn automatically.')
           }
         }
+      })
+    })
+    .then(() => {
+      $('#fightButton').on('click', (event) => {
+        event.preventDefault()
+        $('#fightButton').attr('disabled', true)
+        gameLogic.fightRound()
+        $('#fightButton').attr('disabled', false)
       })
     })
     .catch(console.error)

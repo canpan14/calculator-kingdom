@@ -1,7 +1,10 @@
 'use strict'
 
+const api = require('./api')
+
 const gameViewHbs = require('../templates/gameView.handlebars')
-const cardInHolder = require('../templates/cardInHolder.handlebars')
+const cardInHolderHbs = require('../templates/cardInHolder.handlebars')
+const cardThumbnailHbs = require('../templates/cardThumbnailView.handlebars')
 
 const numberIds = ['calc-1', 'calc-2', 'calc-3', 'calc-4', 'calc-5', 'calc-6', 'calc-7', 'calc-8', 'calc-9']
 
@@ -10,22 +13,19 @@ const initGameView = function () {
   $('#gameView').append(gameViewHbs())
 }
 
-const displayCards = function (cards) {
-  $('#cardHolder').empty()
-  cards.forEach(card => {
-    switch (card.type) {
-      case 'attack':
-        card.backColor = '#ffcccccc'
-        break
-      case 'defense':
-        card.backColor = '#ccccff'
-        break
-      case 'spell':
-        card.backColor = '#ffccff'
-        break
-    }
-  })
-  $('#cardHolder').append(cardInHolder({ cards: cards }))
+const displayCard = function (card) {
+  switch (card.card_type) {
+    case 'attack':
+      card.backColor = '#ffcccccc'
+      break
+    case 'defense':
+      card.backColor = '#ccccff'
+      break
+    case 'spell':
+      card.backColor = '#ffccff'
+      break
+  }
+  $('#cardHolder').append(cardInHolderHbs(card))
 }
 
 const combineNumbers = function (numberToCombineInto, previousNumber, result) {
@@ -68,13 +68,37 @@ const addClickedCSS = function (numberClicked) {
   numberClicked.addClass('clicked')
 }
 
+const addCardToPlayerField = function (card) {
+  switch (card.card_type) {
+    case 'attack':
+      $('#playerAttackCards').append(cardThumbnailHbs(card))
+      break
+    case 'defense':
+      $('#playerDefenseCards').append(cardThumbnailHbs(card))
+      break
+    case 'spell':
+      $('#playerSpellCards').append(cardThumbnailHbs(card))
+      break
+  }
+}
+
+const updateHealthValues = function (playerHealth = null, enemyHealth = null) {
+  if (playerHealth !== null) {
+    $('#playerHealth').text(playerHealth)
+  }
+  if (enemyHealth !== null) {
+    $('#enemyHealth').text(enemyHealth)
+  }
+}
+
 module.exports = {
   initGameView,
-  displayCards,
+  displayCard,
   resetCalc,
   numberClicked,
   combineNumbers,
   removeClickedCSS,
-  removeNumber
-
+  removeNumber,
+  addCardToPlayerField,
+  updateHealthValues
 }

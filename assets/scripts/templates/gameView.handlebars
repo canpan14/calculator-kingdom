@@ -3,26 +3,23 @@
     <div id="playerField" class="card col-6 p-1">
       <div class="card-body p-1">
         <h4 class="card-title">Player</h4>
-        <h6 class="card-text m-0">Health</h6>
+        <h6 class="card-text m-0"><i class="fa fa-heart" aria-hidden="true"></i><span id="playerHealth"></span></h6>
         <h6 class="card-text m-0">Attack</h6>
-        <div id="playerAttackCards" class="miniCardHolder"></div>
+        <div id="playerAttackCards"></div>
         <h6 class="card-text m-0">Defense</h6>
-        <div id="playerDefenseCards" class="miniCardHolder"></div>
-        <h6 class="card-text m-0">Recently Played</h6>
-        <div id="playerRecentlyPlayedCards" class="miniCardHolder"></div>
+        <div id="playerDefenseCards"></div>
       </div>
     </div>
 
     <div id="enemyField" class="card col-6 p-1">
       <div class="card-body p-1">
         <h4 class="card-title">Enemy</h4>
-        <h6 class="card-text m-0">Health</h6>
+        <h6 class="card-text m-0">
+<i class="fa fa-heart" aria-hidden="true"></i><span id="enemyHealth"></span></h6>
         <h6 class="card-text m-0">Attack</h6>
-        <div id="enemyAttackCards" class="miniCardHolder"></div>
+        <div id="enemyAttackCards"></div>
         <h6 class="card-text m-0">Defense</h6>
-        <div id="enemyDefenseCards" class="miniCardHolder"></div>
-        <h6 class="card-text m-0">Recently Played</h6>
-        <div id="enemyRecentlyPlayedCards" class="miniCardHolder"></div>
+        <div id="enemyDefenseCards"></div>
       </div>
     </div>
   </div>
@@ -34,6 +31,10 @@
     </div>
 
     <div class="col-12 col-sm-6">
+      <div class="row justify-content-center mb-2">
+        <button id="fightButton" type="button" class="col-6 btn btn-success"><i class="fa fa-hand-rock-o" aria-hidden="true"></i>Fight!<i class="fa fa-hand-rock-o" aria-hidden="true"></i></button>
+      </div>
+
       <div class="row">
         <div class="btn-group col-12 mb-2">
           <button type="button" class="operation btn btn-primary col-3">+</button>

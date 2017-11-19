@@ -3,7 +3,7 @@
 const Card = function (card) {
   this.name = card.name
   this.description = card.description
-  this.type = card.type
+  this.type = card.card_type
   this.cost = card.cost
   this.attack = card.attack
   this.defense = card.defense

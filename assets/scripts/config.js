@@ -2,8 +2,8 @@
 
 const config = {
   apiOrigins: {
-    development: 'http://localhost:4741',
-    production: 'https://git.heroku.com/calculator-kingdom-api.git'
+    development: 'http://localhost:4741/',
+    production: 'https://calculator-kingdom-api.herokuapp.com/'
   }
 }
 

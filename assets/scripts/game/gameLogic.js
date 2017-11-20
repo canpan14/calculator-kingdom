@@ -6,7 +6,7 @@ const calcLogic = require('./calcLogic')
 const calcState = require('./calcState')
 const gameState = require('./gameState')
 
-const _maxHandSize = 4
+const _maxHandSize = 6
 
 const newGame = function () {
   gameState.setPlayerHealth(100)
@@ -15,17 +15,22 @@ const newGame = function () {
   return api.getCards()
     .then((response) => {
       gameState.setCardLookupTable(response.cards)
-      fillHand()
+      fillHands()
     })
 }
 
-const fillHand = function () {
+const fillHands = function () {
   const cardOptions = gameState.getCardLookupTable()
   const cardsInHand = gameState.getPlayerHand().length
+  const cardsInEnemyHand = gameState.getEnemyHand().length
   for (let i = cardsInHand; i < _maxHandSize; i++) {
     const cardToAdd = cardOptions[Math.floor(Math.random() * cardOptions.length)]
     gameState.addCardToPlayerHand(cardToAdd.id)
     ui.displayCard(cardToAdd)
+  }
+  for (let i = cardsInEnemyHand; i < _maxHandSize; i++) {
+    const cardToAddForEnemy = cardOptions[Math.floor(Math.random() * cardOptions.length)]
+    gameState.addCardToEnemyHand(cardToAddForEnemy.id)
   }
 }
 
@@ -51,10 +56,25 @@ const areAllCardsPlayed = function () {
   return false
 }
 
+const enemyRandomlyPlayCards = function () {
+  const enemyHand = gameState.getEnemyHand()
+  const numberOfCardsToPlay = Math.floor(Math.random() * (enemyHand.length - 1)) + 2
+  for (let i = 0; i < numberOfCardsToPlay; i++) {
+    const cardToPlay = enemyHand[Math.floor(Math.random() * enemyHand.length)]
+    gameState.addCardToEnemyField(cardToPlay)
+    ui.addCardToEnemyField(gameState.getCardLookupTable().find(card => card.id === cardToPlay))
+    gameState.removeCardFromEnemyHand(cardToPlay)
+  }
+}
+
 const fightRound = function () {
+  // Have enemy randomly play some cards
+  enemyRandomlyPlayCards()
+
   const damageTaken = calculateDamageTaken()
   const playerDamageTaken = damageTaken[0]
   const enemyDamageTaken = damageTaken[1]
+
   gameState.setPlayerHealth(gameState.getPlayerHealth() - playerDamageTaken)
   gameState.setEnemyHealth(gameState.getEnemyHealth() - enemyDamageTaken)
   ui.updateHealthValues(gameState.getPlayerHealth(), gameState.getEnemyHealth())
@@ -64,7 +84,7 @@ const fightRound = function () {
   } else if (isLose()) {
     console.log('Player loses!')
   } else {
-    fillHand()
+    fillHands()
     calcLogic.resetBoard()
   }
 }

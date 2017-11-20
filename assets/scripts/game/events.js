@@ -26,6 +26,16 @@ const initializeGamePage = function () {
         event.preventDefault()
         $('#fightButton').attr('disabled', true)
         gameLogic.fightRound()
+        $('.playingCard').unbind('click')
+        $('.playingCard').on('click', (event) => {
+          if (gameLogic.playCard(event, calcState.getCurrentlySelectedNumber())) {
+            ui.removeNumber(calcState.getCurrentlySelectedNumber())
+            calcState.currentNumberWasUsedToPlayCard()
+            if (gameLogic.areAllCardsPlayed()) {
+              $('#fightButton').click()
+            }
+          }
+        })
         $('#fightButton').attr('disabled', false)
       })
     })

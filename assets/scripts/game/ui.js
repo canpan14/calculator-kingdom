@@ -21,9 +21,6 @@ const displayCard = function (card) {
     case 'defense':
       card.backColor = '#ccccff'
       break
-    case 'spell':
-      card.backColor = '#ffccff'
-      break
   }
   $('#cardHolder').append(cardInHolderHbs(card))
 }
@@ -78,8 +75,16 @@ const addCardToPlayerField = function (card) {
     case 'defense':
       $('#playerDefenseCards').append(cardThumbnailHbs(card))
       break
-    case 'spell':
-      $('#playerSpellCards').append(cardThumbnailHbs(card))
+  }
+}
+
+const addCardToEnemyField = function (card) {
+  switch (card.card_type) {
+    case 'attack':
+      $('#enemyAttackCards').append(cardThumbnailHbs(card))
+      break
+    case 'defense':
+      $('#enemyDefenseCards').append(cardThumbnailHbs(card))
       break
   }
 }
@@ -102,5 +107,6 @@ module.exports = {
   removeClickedCSS,
   removeNumber,
   addCardToPlayerField,
+  addCardToEnemyField,
   updateHealthValues
 }

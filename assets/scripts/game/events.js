@@ -16,7 +16,7 @@ const initializeGamePage = function () {
           ui.removeNumber(calcState.getCurrentlySelectedNumber())
           calcState.currentNumberWasUsedToPlayCard()
           if (gameLogic.areAllCardsPlayed()) {
-            console.log('Played all the cards! End turn automatically.')
+            $('#fightButton').click()
           }
         }
       })

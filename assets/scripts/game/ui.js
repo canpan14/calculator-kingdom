@@ -44,6 +44,8 @@ const resetCalc = function (boardToResetTo) {
         $('#' + numberIds[i]).attr('disabled', false)
       }
     }
+  } else {
+    $('.number').attr('disabled', false)
   }
   removeClickedCSS()
 }

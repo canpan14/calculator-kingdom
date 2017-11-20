@@ -2,8 +2,11 @@
 
 const ui = require('./ui')
 const api = require('./api')
+const calcLogic = require('./calcLogic')
 const calcState = require('./calcState')
 const gameState = require('./gameState')
+
+const _maxHandSize = 4
 
 const newGame = function () {
   gameState.setPlayerHealth(100)
@@ -12,12 +15,18 @@ const newGame = function () {
   return api.getCards()
     .then((response) => {
       gameState.setCardLookupTable(response.cards)
-      for (let i = 0; i < 4; i++) {
-        const cardToAdd = response.cards[Math.floor(Math.random() * response.cards.length)]
-        gameState.addCardToPlayerHand(cardToAdd.id)
-        ui.displayCard(cardToAdd)
-      }
+      fillHand()
     })
+}
+
+const fillHand = function () {
+  const cardOptions = gameState.getCardLookupTable()
+  const cardsInHand = gameState.getPlayerHand().length
+  for (let i = cardsInHand; i < _maxHandSize; i++) {
+    const cardToAdd = cardOptions[Math.floor(Math.random() * cardOptions.length)]
+    gameState.addCardToPlayerHand(cardToAdd.id)
+    ui.displayCard(cardToAdd)
+  }
 }
 
 const playCard = function (event, selectedNumber) {
@@ -25,6 +34,7 @@ const playCard = function (event, selectedNumber) {
   if (+$(event.currentTarget).data('cost') === +selectedNumber.text()) {
     const card = gameState.getCardLookupTable().find(card => card.id === $(event.currentTarget).data('id'))
     gameState.addCardToPlayerField($(event.currentTarget).data('id'))
+    gameState.removeCardFromPlayerHand(card.id)
     calcState.saveStateOfCalc()
     ui.addCardToPlayerField(card)
     $(event.currentTarget).remove()
@@ -48,6 +58,23 @@ const fightRound = function () {
   gameState.setPlayerHealth(gameState.getPlayerHealth() - playerDamageTaken)
   gameState.setEnemyHealth(gameState.getEnemyHealth() - enemyDamageTaken)
   ui.updateHealthValues(gameState.getPlayerHealth(), gameState.getEnemyHealth())
+  // For now player gets priority on winning if both die at the same time
+  if (isWin()) {
+    console.log('Player wins!')
+  } else if (isLose()) {
+    console.log('Player loses!')
+  } else {
+    fillHand()
+    calcLogic.resetBoard()
+  }
+}
+
+const isWin = function () {
+  return gameState.getEnemyHealth() <= 0
+}
+
+const isLose = function () {
+  return gameState.getPlayerHealth() <= 0
 }
 
 const calculateDamageTaken = function () {

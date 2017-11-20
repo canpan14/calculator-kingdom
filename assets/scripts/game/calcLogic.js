@@ -72,5 +72,6 @@ const initCalcLogic = function () {
 }
 
 module.exports = {
-  initCalcLogic
+  initCalcLogic,
+  resetBoard
 }

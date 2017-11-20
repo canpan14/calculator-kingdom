@@ -31,14 +31,14 @@ const addCardToEnemyHand = function (card) {
 }
 
 const removeCardFromPlayerHand = function (id) {
-  const index = playerHand.indexOf(playerHand.find(card => card.id === id))
+  const index = playerHand.indexOf(playerHand.find(card => card === id))
   if (index > -1) {
     playerHand.splice(index, 1)
   }
 }
 
 const removeCardFromEnemyHand = function (id) {
-  const index = enemyHand.indexOf(enemyHand.find(card => card.id === id))
+  const index = enemyHand.indexOf(enemyHand.find(card => card === id))
   if (index > -1) {
     enemyHand.splice(index, 1)
   }

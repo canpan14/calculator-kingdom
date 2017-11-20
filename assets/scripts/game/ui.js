@@ -1,6 +1,6 @@
 'use strict'
 
-const api = require('./api')
+const gameState = require('./gameState')
 
 const gameViewHbs = require('../templates/gameView.handlebars')
 const cardInHolderHbs = require('../templates/cardInHolder.handlebars')
@@ -67,26 +67,58 @@ const addClickedCSS = function (numberClicked) {
   numberClicked.addClass('clicked')
 }
 
-const addCardToPlayerField = function (card) {
-  switch (card.card_type) {
-    case 'attack':
-      $('#playerAttackCards').append(cardThumbnailHbs(card))
-      break
-    case 'defense':
-      $('#playerDefenseCards').append(cardThumbnailHbs(card))
-      break
-  }
+const addCardToPlayerField = function () {
+  const cardsOnField = gameState.getPlayerField()
+  const cardDb = gameState.getCardLookupTable()
+  const cardsArray = []
+  cardsOnField.forEach(card => {
+    if (cardsArray.find(cardInArray => cardInArray.id === card)) {
+      cardsArray.find(cardInArray => cardInArray.id === card).count += 1
+    } else {
+      const cardToAdd = cardDb.find(cardInDb => cardInDb.id === card)
+      cardToAdd.count = 1
+      cardsArray.push(cardToAdd)
+    }
+  })
+  $('#playerAttackCards').empty()
+  $('#playerDefenseCards').empty()
+  cardsArray.forEach(card => {
+    switch (card.card_type) {
+      case 'attack':
+        $('#playerAttackCards').append(cardThumbnailHbs(card))
+        break
+      case 'defense':
+        $('#playerDefenseCards').append(cardThumbnailHbs(card))
+        break
+    }
+  })
 }
 
-const addCardToEnemyField = function (card) {
-  switch (card.card_type) {
-    case 'attack':
-      $('#enemyAttackCards').append(cardThumbnailHbs(card))
-      break
-    case 'defense':
-      $('#enemyDefenseCards').append(cardThumbnailHbs(card))
-      break
-  }
+const addCardToEnemyField = function () {
+  const cardsOnField = gameState.getEnemyField()
+  const cardDb = gameState.getCardLookupTable()
+  const cardsArray = []
+  cardsOnField.forEach(card => {
+    if (cardsArray.find(cardInArray => cardInArray.id === card)) {
+      cardsArray.find(cardInArray => cardInArray.id === card).count += 1
+    } else {
+      const cardToAdd = cardDb.find(cardInDb => cardInDb.id === card)
+      cardToAdd.count = 1
+      cardsArray.push(cardToAdd)
+    }
+  })
+  $('#enemyAttackCards').empty()
+  $('#enemyDefenseCards').empty()
+  cardsArray.forEach(card => {
+    switch (card.card_type) {
+      case 'attack':
+        $('#enemyAttackCards').append(cardThumbnailHbs(card))
+        break
+      case 'defense':
+        $('#enemyDefenseCards').append(cardThumbnailHbs(card))
+        break
+    }
+  })
 }
 
 const updateHealthValues = function (playerHealth = null, enemyHealth = null) {

@@ -11,6 +11,7 @@ const _maxHandSize = 6
 const newGame = function () {
   gameState.setPlayerHealth(100)
   gameState.setEnemyHealth(100)
+  gameState.setGameOver(false)
   ui.updateHealthValues(gameState.getPlayerHealth(), gameState.getEnemyHealth())
   return api.getCards()
     .then((response) => {
@@ -58,7 +59,9 @@ const areAllCardsPlayed = function () {
 
 const enemyRandomlyPlayCards = function () {
   const enemyHand = gameState.getEnemyHand()
-  const numberOfCardsToPlay = Math.floor(Math.random() * (enemyHand.length - 1)) + 2
+  const max = enemyHand.length - 3
+  const min = 2
+  const numberOfCardsToPlay = Math.floor(Math.random() * (max - min)) + min
   for (let i = 0; i < numberOfCardsToPlay; i++) {
     const cardToPlay = enemyHand[Math.floor(Math.random() * enemyHand.length)]
     gameState.addCardToEnemyField(cardToPlay)
@@ -68,6 +71,7 @@ const enemyRandomlyPlayCards = function () {
 }
 
 const fightRound = function () {
+  if (gameState.getGameOver()) return
   // Have enemy randomly play some cards
   enemyRandomlyPlayCards()
 
@@ -80,9 +84,9 @@ const fightRound = function () {
   ui.updateHealthValues(gameState.getPlayerHealth(), gameState.getEnemyHealth())
   // For now player gets priority on winning if both die at the same time
   if (isWin()) {
-    console.log('Player wins!')
+    gameState.setGameOver(true)
   } else if (isLose()) {
-    console.log('Player loses!')
+    gameState.setGameOver(true)
   } else {
     fillHands()
     calcLogic.resetBoard()

@@ -1,69 +1,73 @@
 <div class="container-fluid" style="min-width: 400px; max-width: 700px">
-  <div class="row mb-1">
+  <div id="cardsOnTable" class="row mb-1">
     <div id="playerField" class="card col-6 p-1">
       <div class="card-body p-1">
         <h4 class="card-title">Player</h4>
         <h6 class="card-text m-0"><i class="fa fa-heart" aria-hidden="true"></i><span id="playerHealth"></span></h6>
         <h6 class="card-text m-0">Attack</h6>
-        <div id="playerAttackCards"></div>
+        <div id="playerAttackCards" class="row m-0 justify-content-center"></div>
         <h6 class="card-text m-0">Defense</h6>
-        <div id="playerDefenseCards"></div>
+        <div id="playerDefenseCards" class="row m-0 justify-content-center"></div>
       </div>
     </div>
 
     <div id="enemyField" class="card col-6 p-1">
       <div class="card-body p-1">
         <h4 class="card-title">Enemy</h4>
-        <h6 class="card-text m-0">
-<i class="fa fa-heart" aria-hidden="true"></i><span id="enemyHealth"></span></h6>
+        <h6 class="card-text m-0"><i class="fa fa-heart" aria-hidden="true"></i><span id="enemyHealth"></span></h6>
         <h6 class="card-text m-0">Attack</h6>
-        <div id="enemyAttackCards"></div>
+        <div id="enemyAttackCards" class="row m-0 justify-content-center"></div>
         <h6 class="card-text m-0">Defense</h6>
-        <div id="enemyDefenseCards"></div>
+        <div id="enemyDefenseCards" class="row m-0 justify-content-center"></div>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12 col-sm-6 mb-2 bm-mb-0">
-      <div id="cardHolder" class="row" style="min-width: 200px; min-height: 200px; border: solid black 1px;">
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6">
-      <div class="row justify-content-center mb-2">
-        <button id="fightButton" type="button" class="col-6 btn btn-success"><i class="fa fa-hand-rock-o" aria-hidden="true"></i>Fight!<i class="fa fa-hand-rock-o" aria-hidden="true"></i></button>
+  <div id="handAndCalc" class="collapse show">
+    <div class="row">
+      <div class="col-12 col-sm-6 mb-2 bm-mb-0">
+        <div id="cardHolder" class="row" style="min-width: 200px; min-height: 200px; border: solid black 1px;">
+        </div>
       </div>
 
-      <div class="row">
-        <div class="btn-group col-12 mb-2">
-          <button type="button" class="operation btn btn-primary col-3">+</button>
-          <button type="button" class="operation btn btn-primary col-3">-</button>
-          <button type="button" class="operation btn btn-primary col-3">X</button>
-          <button type="button" class="reset-calc btn btn-primary col-3">C</button>
+      <div class="col-12 col-sm-6">
+        <div class="row justify-content-center mb-2">
+          <button id="fightButton" type="button" class="col-6 btn btn-success"><i class="fa fa-hand-rock-o" aria-hidden="true"></i>Fight!<i class="fa fa-hand-rock-o" aria-hidden="true"></i></button>
         </div>
-      </div>
-      <div class="row">
-        <div class="btn-group col-12">
-          <button id='calc-1' type="button" class="number btn btn-info col-4"></button>
-          <button id='calc-2' type="button" class="number btn btn-info col-4"></button>
-          <button id='calc-3' type="button" class="number btn btn-info col-4"></button>
+
+        <div class="row">
+          <div class="btn-group col-12 mb-2">
+            <button type="button" class="operation btn btn-primary col-3">+</button>
+            <button type="button" class="operation btn btn-primary col-3">-</button>
+            <button type="button" class="operation btn btn-primary col-3">X</button>
+            <button type="button" class="reset-calc btn btn-primary col-3">C</button>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="btn-group col-12">
-          <button id='calc-4' type="button" class="number btn btn-info col-4"></button>
-          <button id='calc-5' type="button" class="number btn btn-info col-4"></button>
-          <button id='calc-6' type="button" class="number btn btn-info col-4"></button>
+        <div class="row">
+          <div class="btn-group col-12">
+            <button id='calc-1' type="button" class="number btn btn-info col-4"></button>
+            <button id='calc-2' type="button" class="number btn btn-info col-4"></button>
+            <button id='calc-3' type="button" class="number btn btn-info col-4"></button>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="btn-group col-12">
-          <button id='calc-7' type="button" class="number btn btn-info col-4"></button>
-          <button id='calc-8' type="button" class="number btn btn-info col-4"></button>
-          <button id='calc-9' type="button" class="number btn btn-info col-4"></button>
+        <div class="row">
+          <div class="btn-group col-12">
+            <button id='calc-4' type="button" class="number btn btn-info col-4"></button>
+            <button id='calc-5' type="button" class="number btn btn-info col-4"></button>
+            <button id='calc-6' type="button" class="number btn btn-info col-4"></button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="btn-group col-12">
+            <button id='calc-7' type="button" class="number btn btn-info col-4"></button>
+            <button id='calc-8' type="button" class="number btn btn-info col-4"></button>
+            <button id='calc-9' type="button" class="number btn btn-info col-4"></button>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div id="gameResult" class="collapse">
   </div>
 </div>

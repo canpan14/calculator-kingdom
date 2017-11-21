@@ -5,6 +5,8 @@ const gameState = require('./gameState')
 const gameViewHbs = require('../templates/gameView.handlebars')
 const cardInHolderHbs = require('../templates/cardInHolder.handlebars')
 const cardThumbnailHbs = require('../templates/cardThumbnailView.handlebars')
+const winGameHbs = require('../templates/winGame.handlebars')
+const loseGameHbs = require('../templates/loseGame.handlebars')
 
 const numberIds = ['calc-1', 'calc-2', 'calc-3', 'calc-4', 'calc-5', 'calc-6', 'calc-7', 'calc-8', 'calc-9']
 
@@ -130,6 +132,17 @@ const updateHealthValues = function (playerHealth = null, enemyHealth = null) {
   }
 }
 
+const gameOver = function (whoWon) {
+  $('#handAndCalc').collapse('hide')
+  $('#gameResult').empty()
+  if (whoWon === 'player win') {
+    $('#gameResult').append(winGameHbs())
+  } else {
+    $('#gameResult').append(loseGameHbs())
+  }
+  $('#gameResult').collapse('show')
+}
+
 module.exports = {
   initGameView,
   displayCard,
@@ -140,5 +153,6 @@ module.exports = {
   removeNumber,
   addCardToPlayerField,
   addCardToEnemyField,
-  updateHealthValues
+  updateHealthValues,
+  gameOver
 }

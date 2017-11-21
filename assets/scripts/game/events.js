@@ -5,6 +5,7 @@ const ui = require('./ui')
 const calcLogic = require('./calcLogic')
 const calcState = require('./calcState')
 const gameLogic = require('./gameLogic')
+const gameState = require('./gameState')
 
 const initializeGamePage = function () {
   ui.initGameView()
@@ -26,6 +27,13 @@ const initializeGamePage = function () {
         event.preventDefault()
         $('#fightButton').attr('disabled', true)
         gameLogic.fightRound()
+        if (gameState.getGameOver()) {
+          if (gameState.getEnemyHealth() <= 0) {
+            ui.gameOver('player win')
+          } else {
+            ui.gameOver('enemy win')
+          }
+        }
         $('.playingCard').unbind('click')
         $('.playingCard').on('click', (event) => {
           if (gameLogic.playCard(event, calcState.getCurrentlySelectedNumber())) {

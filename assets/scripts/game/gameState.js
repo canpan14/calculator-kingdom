@@ -16,6 +16,13 @@ let cardLookupTable = []
 let playerHealth = null
 let enemyHealth = null
 
+let gameOver = false
+
+const getGameOver = () => gameOver
+const setGameOver = (newGameOver) => {
+  gameOver = newGameOver
+}
+
 const getCardLookupTable = () => cardLookupTable
 
 const setCardLookupTable = (cards) => {
@@ -64,20 +71,22 @@ const setEnemyHealth = (newHealth) => {
 }
 
 module.exports = {
-  getPlayerHand,
-  getEnemyHand,
-  getPlayerField,
-  getEnemyField,
-  addCardToPlayerHand,
-  addCardToEnemyHand,
-  removeCardFromPlayerHand,
-  removeCardFromEnemyHand,
-  addCardToPlayerField,
   addCardToEnemyField,
-  getPlayerHealth,
-  getEnemyHealth,
-  setPlayerHealth,
-  setEnemyHealth,
+  addCardToEnemyHand,
+  addCardToPlayerField,
+  addCardToPlayerHand,
   getCardLookupTable,
-  setCardLookupTable
+  getEnemyField,
+  getEnemyHand,
+  getEnemyHealth,
+  getGameOver,
+  getPlayerField,
+  getPlayerHand,
+  getPlayerHealth,
+  removeCardFromEnemyHand,
+  removeCardFromPlayerHand,
+  setCardLookupTable,
+  setEnemyHealth,
+  setGameOver,
+  setPlayerHealth
 }

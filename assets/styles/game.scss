@@ -1,12 +1,20 @@
-.number {
-  border-radius: 0;
+
+.cardThumbnail {
+  height: fit-content;
+  width: fit-content;
 }
 
 .clicked {
   background-color: #8a2be2;
 }
 
-.cardThumbnail {
-  height: fit-content;
-  width: fit-content;
+.number {
+  border-radius: 0;
+  border: 1px solid #b7b7b7;
+  min-height: 45px;
+}
+
+.operation, .reset-calc {
+  border: 1px solid #b7b7b7;
+  min-height: 45px;
 }

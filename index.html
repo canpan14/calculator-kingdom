@@ -12,7 +12,25 @@
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
-    <body class="container-fluid">
+    <body class="container-fluid p-0">
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#"><i class="fa fa-calculator" aria-hidden="true"></i>Calculator Kingdom</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="active-after-signin nav-item" style="display: none;">
+              <a class="nav-link" href="#">Change Password</a>
+            </li>
+            <li class="active-after-signin nav-item active" style="display: none;">
+              <a class="nav-link" href="#">Sign Out</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div id="authView"></div>
       <div id="gameView"></div>
     </body>
 </html>

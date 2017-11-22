@@ -9,6 +9,7 @@ const gameState = require('./gameState')
 const _maxHandSize = 6
 
 const newGame = function () {
+  gameState.clearState()
   gameState.setPlayerHealth(100)
   gameState.setEnemyHealth(100)
   gameState.setGameOver(false)

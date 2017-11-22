@@ -29,6 +29,17 @@ const setCardLookupTable = (cards) => {
   cardLookupTable = cardLookupTable.concat(cards)
 }
 
+const clearState = function () {
+  playerHand.length = 0
+  enemyHand.length = 0
+  playerField.length = 0
+  enemyField.length = 0
+  cardLookupTable.length = 0
+  playerHealth = null
+  enemyHealth = null
+  gameOver = false
+}
+
 const addCardToPlayerHand = function (card) {
   playerHand.push(card)
 }
@@ -75,6 +86,7 @@ module.exports = {
   addCardToEnemyHand,
   addCardToPlayerField,
   addCardToPlayerHand,
+  clearState,
   getCardLookupTable,
   getEnemyField,
   getEnemyHand,

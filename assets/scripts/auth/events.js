@@ -10,7 +10,7 @@ const onSignIn = function (event) {
   const formData = getFormFields(event.target)
   api.signIn(formData)
     .then(ui.onSignInSuccess)
-    .then(gameEvents.initializeGamePage)
+    .then(showGameScreen)
     .catch(ui.onSignInFailure)
 }
 
@@ -23,8 +23,33 @@ const onSignUp = function (event) {
     .catch(ui.onSignUpFailure)
 }
 
+const onSignOut = function (event) {
+  event.preventDefault()
+  api.signOut()
+    .then(ui.onSignOutSuccess)
+    .then(showSignIn)
+    .catch(ui.onSignOutFailure)
+}
+
+const onChangePassword = function (event) {
+  event.preventDefault()
+  const formData = getFormFields(event.target)
+  api.changePassword(formData)
+    .then(ui.onChangePasswordSuccess)
+    .catch(ui.onChangePasswordFailure)
+}
+
 const isAlreadySignedIn = function () {
   return false
+}
+
+const showGameScreen = function () {
+  gameEvents.initializeGamePage()
+}
+
+const showChangePassword = function () {
+  ui.showChangePassword()
+  $('#changePasswordForm').on('submit', onChangePassword)
 }
 
 const showSignIn = function () {
@@ -50,7 +75,8 @@ const loadInitialPage = function () {
 }
 
 const registerHandlers = function () {
-
+  $('#signOut').on('click', onSignOut)
+  $('#changePassword').on('click', showChangePassword)
 }
 
 module.exports = {

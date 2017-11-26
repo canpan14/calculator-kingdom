@@ -1,0 +1,26 @@
+<form id="newDeckForm" class="form-inline">
+  <div class="form-group mr-1">
+    <input type="text" placeholder="Name" name="deck[name]">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Create New Deck</button>
+  </div>
+</form>
+
+</form>
+<table id="myDecks" class="table table-hover text-center table-border table-striped">
+  <thead>
+    <tr>
+      <th>Deck Name</th>
+      <th>Number of Cards</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each decks as |deck|}}
+      <tr id="{{deck.id}}">
+        <td>{{deck.name}}</td>
+        <td>{{deck.cardCount}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

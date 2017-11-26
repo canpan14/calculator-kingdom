@@ -7,6 +7,7 @@
 // bootstrap 4
 window.Popper = require('popper.js')
 require('bootstrap')
+require('multiselect-two-sides')
 
 // scripts
 require('./assets/scripts/index.js')

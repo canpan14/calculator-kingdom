@@ -6,10 +6,10 @@ const calcState = require('./calcState')
 const gameLogic = require('./gameLogic')
 const gameState = require('./gameState')
 
-const initializeGamePage = function () {
+const initializeGamePage = function (cardsInDeck) {
   ui.initGameView()
   calcLogic.initCalcLogic()
-  gameLogic.newGame()
+  gameLogic.newGame(cardsInDeck)
     .then(() => {
       $('.playingCard').on('click', (event) => {
         if (gameLogic.playCard(event, calcState.getCurrentlySelectedNumber())) {

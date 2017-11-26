@@ -2,7 +2,7 @@
 
 const api = require('./api')
 const ui = require('./ui')
-const gameEvents = require('../game/events')
+const homeEvents = require('../home/events')
 const getFormFields = require('../../../lib/get-form-fields')
 
 const onSignIn = function (event) {
@@ -10,7 +10,7 @@ const onSignIn = function (event) {
   const formData = getFormFields(event.target)
   api.signIn(formData)
     .then(ui.onSignInSuccess)
-    .then(showGameScreen)
+    .then(showHomeScreen)
     .catch(ui.onSignInFailure)
 }
 
@@ -43,8 +43,8 @@ const isAlreadySignedIn = function () {
   return false
 }
 
-const showGameScreen = function () {
-  gameEvents.initializeGamePage()
+const showHomeScreen = function () {
+  homeEvents.initializeHomePage()
 }
 
 const showChangePassword = function () {
@@ -67,7 +67,7 @@ const showSignUp = function () {
 const loadInitialPage = function () {
   if (isAlreadySignedIn()) {
     console.log('loading game')
-    gameEvents.initializeGamePage()
+    homeEvents.initializeHomePage()
   } else {
     console.log('loading sign in')
     showSignIn()

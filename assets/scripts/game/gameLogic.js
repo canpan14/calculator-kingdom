@@ -8,7 +8,7 @@ const gameState = require('./gameState')
 
 const _maxHandSize = 6
 
-const newGame = function () {
+const newGame = function (cardsInPlayerDeck) {
   gameState.clearState()
   gameState.setPlayerHealth(100)
   gameState.setEnemyHealth(100)
@@ -17,21 +17,30 @@ const newGame = function () {
   return api.getCards()
     .then((response) => {
       gameState.setCardLookupTable(response.cards)
+      if (cardsInPlayerDeck !== undefined && cardsInPlayerDeck !== null && cardsInPlayerDeck.length > 0) {
+        cardsInPlayerDeck.forEach(cardId => {
+          const cardToAdd = gameState.getCardLookupTable().find(card => card.id === cardId)
+          gameState.setPlayerDeck(cardToAdd)
+        })
+      } else {
+        gameState.setPlayerDeck(gameState.getCardLookupTable())
+      }
       fillHands()
     })
 }
 
 const fillHands = function () {
-  const cardOptions = gameState.getCardLookupTable()
+  const enemyCardOptions = gameState.getCardLookupTable()
+  const playerCardOptions = gameState.getPlayerDeck()
   const cardsInHand = gameState.getPlayerHand().length
   const cardsInEnemyHand = gameState.getEnemyHand().length
   for (let i = cardsInHand; i < _maxHandSize; i++) {
-    const cardToAdd = cardOptions[Math.floor(Math.random() * cardOptions.length)]
+    const cardToAdd = playerCardOptions[Math.floor(Math.random() * playerCardOptions.length)]
     gameState.addCardToPlayerHand(cardToAdd.id)
     ui.displayCard(cardToAdd)
   }
   for (let i = cardsInEnemyHand; i < _maxHandSize; i++) {
-    const cardToAddForEnemy = cardOptions[Math.floor(Math.random() * cardOptions.length)]
+    const cardToAddForEnemy = enemyCardOptions[Math.floor(Math.random() * enemyCardOptions.length)]
     gameState.addCardToEnemyHand(cardToAddForEnemy.id)
   }
 }

@@ -2,7 +2,6 @@
 
 const ui = require('./ui')
 const api = require('./api')
-const gameApi = require('../game/api')
 const getFormFields = require('../../../lib/get-form-fields')
 
 const showDecksView = function () {

@@ -12,6 +12,8 @@ const getPlayerField = () => playerField
 const getEnemyField = () => enemyField
 
 let cardLookupTable = []
+let playerDeck = []
+let enemyDeck = []
 
 let playerHealth = null
 let enemyHealth = null
@@ -21,6 +23,17 @@ let gameOver = false
 const getGameOver = () => gameOver
 const setGameOver = (newGameOver) => {
   gameOver = newGameOver
+}
+
+const getPlayerDeck = () => playerDeck
+const getEnemyDeck = () => enemyDeck
+
+const setPlayerDeck = (pDeck) => {
+  playerDeck = playerDeck.concat(pDeck)
+}
+
+const setEnemyDeck = (eDeck) => {
+  enemyDeck = enemyDeck.concat(eDeck)
 }
 
 const getCardLookupTable = () => cardLookupTable
@@ -100,5 +113,9 @@ module.exports = {
   setCardLookupTable,
   setEnemyHealth,
   setGameOver,
-  setPlayerHealth
+  setPlayerHealth,
+  getPlayerDeck,
+  getEnemyDeck,
+  setPlayerDeck,
+  setEnemyDeck
 }

@@ -6,11 +6,11 @@ const noDecksHbs = require('../templates/noDecks.handlebars')
 const cardOptionHbs = require('../templates/cardOption.handlebars')
 
 const gameApi = require('../game/api')
+const sharedUI = require('../shared/ui')
 let cardsDb = []
 
 const showDecksView = function (response) {
-  $('#gameView').empty()
-  $('#decksView').empty()
+  sharedUI.clearAllViews()
   if (response.decks) {
     const decks = response.decks.map(deck => {
       deck.cardCount = deck.cards.length
@@ -23,7 +23,7 @@ const showDecksView = function (response) {
 }
 
 const showDeckManagement = function (response) {
-  $('#decksView').empty()
+  sharedUI.clearAllViews()
   const cardIdsInDeck = response.deck.cards
   const cardsInDeck = []
   const cardsNotInDeck = []

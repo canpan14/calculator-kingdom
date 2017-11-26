@@ -1,6 +1,7 @@
 'use strict'
 
 const gameState = require('./gameState')
+const sharedUI = require('../shared/ui')
 
 const gameViewHbs = require('../templates/gameView.handlebars')
 const cardInHolderHbs = require('../templates/cardInHolder.handlebars')
@@ -11,7 +12,7 @@ const loseGameHbs = require('../templates/loseGame.handlebars')
 const numberIds = ['calc-1', 'calc-2', 'calc-3', 'calc-4', 'calc-5', 'calc-6', 'calc-7', 'calc-8', 'calc-9']
 
 const initGameView = function () {
-  $('#gameView').empty()
+  sharedUI.clearAllViews()
   $('#gameView').append(gameViewHbs())
 }
 

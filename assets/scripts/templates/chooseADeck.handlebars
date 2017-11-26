@@ -1,0 +1,22 @@
+<div class="alert alert-primary" role="alert">
+  Select an army to defend your kingdom!
+</div>
+<table id="myDecks" class="table table-hover text-center table-border table-striped">
+  <thead>
+    <tr>
+      <th>Army Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each decks as |deck|}}
+      <tr id="{{deck.id}}">
+        <td>{{deck.name}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<div class="alert alert-warning" role="alert">
+  <p>Or tell all your troops to join the battle.</p>
+  <hr>
+  <button class="btn btn-secondary" id="useRandomDeck">Everyone, to arms!</button>
+</div>

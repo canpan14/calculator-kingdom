@@ -1,30 +1,31 @@
 'use strict'
 
 const store = require('../store')
+const sharedUI = require('../shared/ui')
 
 const signInHbs = require('../templates/signIn.handlebars')
 const signUpHbs = require('../templates/signUp.handlebars')
 const changePasswordHbs = require('../templates/changePasswordModal.handlebars')
 
 const showSignIn = function () {
-  $('#authView').empty()
+  sharedUI.clearAllViews()
   $('#authView').append(signInHbs())
 }
 
 const showSignUp = function () {
-  $('#authView').empty()
+  sharedUI.clearAllViews()
   $('#authView').append(signUpHbs())
 }
 
 const showChangePassword = function () {
-  $('#changePasswordView').empty()
+  sharedUI.clearAllViews()
   $('#changePasswordView').append(changePasswordHbs())
   $('#changePasswordModal').modal('show')
 }
 
 const onSignInSuccess = function (response) {
   store.user = response.user
-  $('#authView').empty()
+  sharedUI.clearAllViews()
   $('.active-after-signin').show()
 }
 
@@ -33,7 +34,7 @@ const onSignInFailure = function () {
 }
 
 const onSignUpSuccess = function () {
-  $('#authView').empty()
+  sharedUI.clearAllViews()
 }
 
 const onSignUpFailure = function () {
@@ -41,7 +42,7 @@ const onSignUpFailure = function () {
 }
 
 const onSignOutSuccess = function () {
-  $('#gameView').empty()
+  sharedUI.clearAllViews()
   $('.active-after-signin').hide()
   console.log('signed out')
 }

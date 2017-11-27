@@ -3,7 +3,7 @@
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
 const authEvents = require('./auth/events')
-const deckEvents = require('./deck/events')
+const homeEvents = require('./home/events')
 
 $(() => {
   setAPIOrigin(location, config)
@@ -11,6 +11,6 @@ $(() => {
 
 $(() => {
   authEvents.registerHandlers()
-  deckEvents.registerHandlers()
+  homeEvents.registerHandlers()
   authEvents.loadInitialPage()
 })

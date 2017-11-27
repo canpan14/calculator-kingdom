@@ -8,6 +8,8 @@ const gameEvents = require('../game/events')
 const initializeHomePage = function () {
   ui.showHomePage()
   $('#playGame').on('click', showChooseADeck)
+  $('#manageDecks').on('click', deckEvents.showDecksView)
+  $('#help').on('click', ui.showHelp)
 }
 
 const showChooseADeck = function () {
@@ -34,6 +36,11 @@ const startGame = function (event) {
   }
 }
 
+const registerHandlers = function () {
+  $('#home').on('click', initializeHomePage)
+}
+
 module.exports = {
+  registerHandlers,
   initializeHomePage
 }

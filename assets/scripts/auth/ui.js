@@ -18,7 +18,7 @@ const showSignUp = function () {
 }
 
 const showChangePassword = function () {
-  sharedUI.clearAllViews()
+  $('#changePasswordView').empty()
   $('#changePasswordView').append(changePasswordHbs())
   $('#changePasswordModal').modal('show')
 }
@@ -44,7 +44,6 @@ const onSignUpFailure = function () {
 const onSignOutSuccess = function () {
   sharedUI.clearAllViews()
   $('.active-after-signin').hide()
-  console.log('signed out')
 }
 
 const onSignOutFailure = function () {

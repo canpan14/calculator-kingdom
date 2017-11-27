@@ -5,6 +5,7 @@ const sharedUI = require('../shared/ui')
 const homeViewHbs = require('../templates/homeView.handlebars')
 const chooseADeckHbs = require('../templates/chooseADeck.handlebars')
 const noDecksForChooseADeckHbs = require('../templates/noDecksForChooseADeck.handlebars')
+const helpViewHbs = require('../templates/helpView.handlebars')
 
 const showHomePage = function () {
   sharedUI.clearAllViews()
@@ -18,10 +19,15 @@ const showChooseADeck = function (response) {
       deck.cardCount = deck.cards.length
       return deck
     })
-    $('#decksView').append(chooseADeckHbs({decks: decks}))
+    $('#homeView').append(chooseADeckHbs({decks: decks}))
   } else {
-    $('#decksView').append(noDecksForChooseADeckHbs())
+    $('#homeView').append(noDecksForChooseADeckHbs())
   }
+}
+
+const showHelp = function () {
+  sharedUI.clearAllViews()
+  $('#homeView').append(helpViewHbs())
 }
 
 const chooseADeckFailure = function () {
@@ -31,5 +37,6 @@ const chooseADeckFailure = function () {
 module.exports = {
   showHomePage,
   showChooseADeck,
-  chooseADeckFailure
+  chooseADeckFailure,
+  showHelp
 }

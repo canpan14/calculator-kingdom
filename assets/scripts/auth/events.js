@@ -66,10 +66,8 @@ const showSignUp = function () {
 
 const loadInitialPage = function () {
   if (isAlreadySignedIn()) {
-    console.log('loading game')
     homeEvents.initializeHomePage()
   } else {
-    console.log('loading sign in')
     showSignIn()
   }
 }

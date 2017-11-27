@@ -44,16 +44,15 @@ const onSaveDeck = function (event) {
       cardsInDeck.push(data.value)
     }
   })
-  console.log(cardsInDeck)
   api.updateDeck(deckId, deckName, cardsInDeck)
     .then(showDecksView)
     .catch(ui.updateDeckFailure)
 }
 
 const registerHandlers = function () {
-  $('#decks').on('click', showDecksView)
 }
 
 module.exports = {
-  registerHandlers
+  registerHandlers,
+  showDecksView
 }

@@ -1,9 +1,11 @@
 <h3 class="text-center">{{deck.name}}</h3>
 <form id="saveDeckForm">
   <input type="hidden" name="deck" value="{{deck.id}}">
-  <div class="form-group">
-    <label>Deck Name</label>
-    <input type="text" name="deckName" value="{{deck.name}}" required>
+  <div class="row justify-content-center">
+    <div class="form-group">
+      <label>Army Name</label>
+      <input type="text" name="deckName" value="{{deck.name}}" required>
+    </div>
   </div>
   <div class="row">
     <div class="col-5">
@@ -25,6 +27,6 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    <button type="submit" class="btn btn-primary col-12 col-md-6 col-xl-5">Save Deck</button>
+    <button type="submit" class="btn btn-primary col-12 col-md-6 col-xl-5">Save Army</button>
   </div>
 </form>

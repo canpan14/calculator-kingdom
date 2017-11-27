@@ -1,13 +1,6 @@
-<form id="newDeckForm" class="form-inline">
-  <div class="form-group mr-1">
-    <input type="text" placeholder="Name" name="deck[name]">
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary">Create New Army</button>
-  </div>
-</form>
-
-</form>
+<div class="alert alert-primary" role="alert">
+  Select an army to modify.
+</div>
 <table id="myDecks" class="table table-hover text-center table-border table-striped">
   <thead>
     <tr>
@@ -24,3 +17,6 @@
     {{/each}}
   </tbody>
 </table>
+<div class="row justify-content-center">
+  <button id="newDeckBtn" class="btn btn-primary">Create a New Army</button>
+</div>

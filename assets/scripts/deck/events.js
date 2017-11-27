@@ -8,23 +8,28 @@ const showDecksView = function () {
   api.getDecks()
     .then(ui.showDecksView)
     .then(() => {
-      $('#newDeckForm').on('submit', onCreateDeck)
+      $('#newDeckBtn').on('click', onCreateDeck)
       $('#myDecks > tbody > tr').on('click', modifyDeck)
     })
     .catch(ui.getDecksFailure)
 }
 
-const onCreateDeck = function (event) {
+const onCreateDeck = function () {
   event.preventDefault()
-  const formData = getFormFields(event.target)
-  api.createDeck(formData)
-    .then(showDecksView)
+  api.createDeck()
+    .then(response => modifyDeck(null, response.deck.id))
     .catch(ui.createDeckFailure)
 }
 
-const modifyDeck = function (event) {
-  event.preventDefault()
-  api.getDeck(event.currentTarget.id)
+const modifyDeck = function (event, idFromCreation = null) {
+  let id = null
+  if (!idFromCreation) {
+    event.preventDefault()
+    id = event.currentTarget.id
+  } else {
+    id = idFromCreation
+  }
+  api.getDeck(id)
     .then(ui.showDeckManagement)
     .then(() => {
       $('#multiselect').multiselect()
@@ -37,7 +42,10 @@ const onSaveDeck = function (event) {
   event.preventDefault()
   const formData = $(event.target).serializeArray()
   const deckId = formData.find(data => data.name === 'deck').value
-  const deckName = formData.find(data => data.name === 'deckName').value
+  let deckName = formData.find(data => data.name === 'deckName').value
+  if (deckName.trim() === '') {
+    deckName = 'Unnamed Army'
+  }
   const cardsInDeck = []
   formData.forEach(data => {
     if (data.name === 'to') {

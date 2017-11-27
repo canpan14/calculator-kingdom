@@ -8,6 +8,12 @@
   background-color: #8a2be2;
 }
 
+.help-scroll {
+  height: 350px;
+  overflow: auto;
+  position: relative;
+}
+
 .number {
   border-radius: 0;
   border: 1px solid #b7b7b7;

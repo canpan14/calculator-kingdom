@@ -44,19 +44,19 @@ const showDeckManagement = function (response) {
 }
 
 const getDecksFailure = function () {
-  console.log('failed to get users decks')
+  sharedUI.failureNotification('Failed to retrieve users armies, try again later.')
 }
 
 const getDeckFailure = function () {
-  console.log('faied to get deck')
+  sharedUI.failureNotification('Failed to retrieve this army, try again later.')
 }
 
 const createDeckFailure = function () {
-  console.log('failed to create deck')
+  sharedUI.failureNotification('Failed to create a new army, try again later.')
 }
 
 const updateDeckFailure = function () {
-  console.log('failed to update deck')
+  sharedUI.failureNotification('Failed to update this army, try again later.')
 }
 
 const addCardSuccess = function () {
@@ -64,6 +64,7 @@ const addCardSuccess = function () {
 }
 
 const addCardFailure = function () {
+  sharedUI.failureNotification('Failed to update this army, try again later.')
   return false
 }
 
@@ -72,6 +73,7 @@ const removeCardSuccess = function () {
 }
 
 const removeCardFailure = function () {
+  sharedUI.failureNotification('Failed to update this army, try again later.')
   return false
 }
 

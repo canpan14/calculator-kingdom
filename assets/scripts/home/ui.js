@@ -31,7 +31,7 @@ const showHelp = function () {
 }
 
 const chooseADeckFailure = function () {
-  console.log('failed to load decks')
+  sharedUI.failureNotification('Failed to load the users armies, try again later.')
 }
 
 module.exports = {

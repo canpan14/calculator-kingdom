@@ -6,9 +6,9 @@
 // load manifests
 // bootstrap 4
 window.Popper = require('popper.js')
-require('bootstrap/dist/js/bootstrap.js')
 require('bootstrap')
 require('multiselect-two-sides')
+require('bootstrap-notify')
 
 // scripts
 require('./assets/scripts/index.js')

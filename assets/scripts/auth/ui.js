@@ -30,7 +30,7 @@ const onSignInSuccess = function (response) {
 }
 
 const onSignInFailure = function () {
-  console.log('failed to sign in')
+  sharedUI.failureNotification('Incorrect username or password')
 }
 
 const onSignUpSuccess = function () {
@@ -38,7 +38,7 @@ const onSignUpSuccess = function () {
 }
 
 const onSignUpFailure = function () {
-  console.log('failed to sign up')
+  sharedUI.failureNotification('Username in use or passwords did not match')
 }
 
 const onSignOutSuccess = function () {
@@ -56,7 +56,7 @@ const onChangePasswordSuccess = function () {
 }
 
 const onChangePasswordFailure = function () {
-  console.log('change password failure')
+  sharedUI.failureNotification('Invalid old or new password')
 }
 
 module.exports = {

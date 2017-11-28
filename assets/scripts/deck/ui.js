@@ -13,7 +13,7 @@ const showDecksView = function (response) {
   sharedUI.clearAllViews()
   if (response.decks) {
     const decks = response.decks.map(deck => {
-      deck.cardCount = deck.cards.length
+      deck.cardCount = deck.cards_in_deck.length
       return deck
     })
     $('#decksView').append(decksViewHbs({decks: decks}))
@@ -23,22 +23,21 @@ const showDecksView = function (response) {
 }
 
 const showDeckManagement = function (response) {
+  const deck = Object.assign({}, response.deck)
   sharedUI.clearAllViews()
-  const cardIdsInDeck = response.deck.cards
-  const cardsInDeck = []
+  const cardsInDeck = deck.cards
   const cardsNotInDeck = []
   return gameApi.getCards()
     .then((getCardsResponse) => {
       cardsDb = getCardsResponse.cards
       cardsDb.forEach(card => {
-        if (cardIdsInDeck.includes(card.id)) {
+        if (cardsInDeck.includes(card)) {
           cardsInDeck.push(card)
         } else {
           cardsNotInDeck.push(card)
         }
       })
-      response.deck.cards = cardsInDeck
-      $('#decksView').append(deckManagementHbs(response))
+      $('#decksView').append(deckManagementHbs({deck: deck}))
       $('#multiselect').append(cardOptionHbs({ cards: cardsNotInDeck }))
     })
 }
@@ -59,11 +58,31 @@ const updateDeckFailure = function () {
   console.log('failed to update deck')
 }
 
+const addCardSuccess = function () {
+  return true
+}
+
+const addCardFailure = function () {
+  return false
+}
+
+const removeCardSuccess = function () {
+  return true
+}
+
+const removeCardFailure = function () {
+  return false
+}
+
 module.exports = {
   showDecksView,
   getDecksFailure,
   createDeckFailure,
   getDeckFailure,
   showDeckManagement,
-  updateDeckFailure
+  updateDeckFailure,
+  addCardSuccess,
+  addCardFailure,
+  removeCardSuccess,
+  removeCardFailure
 }

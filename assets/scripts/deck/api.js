@@ -38,7 +38,7 @@ const createDeck = function (data) {
   })
 }
 
-const updateDeck = function (id, name, cards) {
+const updateDeck = function (id, name) {
   return $.ajax({
     url: config.apiOrigin + 'decks/' + id,
     method: 'PATCH',
@@ -47,9 +47,34 @@ const updateDeck = function (id, name, cards) {
     },
     data: {
       deck: {
-        name: name,
-        cards: cards
+        name: name
       }
+    }
+  })
+}
+
+const addCardToDeck = function (deckId, cardId) {
+  return $.ajax({
+    url: config.apiOrigin + 'cards_in_decks',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      cards_in_deck: {
+        deck_id: deckId,
+        card_id: cardId
+      }
+    }
+  })
+}
+
+const removeCardFromDeck = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + 'cards_in_decks/' + id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
     }
   })
 }
@@ -58,5 +83,7 @@ module.exports = {
   getDecks,
   getDeck,
   createDeck,
-  updateDeck
+  updateDeck,
+  addCardToDeck,
+  removeCardFromDeck
 }

@@ -2,9 +2,11 @@
 
 const ui = require('./ui')
 const api = require('./api')
-const getFormFields = require('../../../lib/get-form-fields')
+
+let deckCurrentModifying = null
 
 const showDecksView = function () {
+  deckCurrentModifying = null
   api.getDecks()
     .then(ui.showDecksView)
     .then(() => {
@@ -29,13 +31,27 @@ const modifyDeck = function (event, idFromCreation = null) {
   } else {
     id = idFromCreation
   }
+  deckCurrentModifying = id
   api.getDeck(id)
     .then(ui.showDeckManagement)
     .then(() => {
-      $('#multiselect').multiselect()
+      $('#multiselect').multiselect({
+        beforeMoveToRight: addCardToDeck,
+        beforeMoveToLeft: removeCardFromDeck
+      })
       $('#saveDeckForm').on('submit', onSaveDeck)
     })
     .catch(ui.getDeckFailure)
+}
+
+const addCardToDeck = function (left, right, selected) {
+  return api.addCardToDeck(deckCurrentModifying, selected[0].value)
+    .then(ui.addCardSuccess)
+    .catch(ui.addCardFailure)
+}
+
+const removeCardFromDeck = function (left, right, selected) {
+  console.log(selected)
 }
 
 const onSaveDeck = function (event) {

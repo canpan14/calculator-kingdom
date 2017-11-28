@@ -1,7 +1,6 @@
 'use strict'
 
 const config = require('../config')
-const store = require('../store')
 
 const getCards = function () {
   return $.ajax({

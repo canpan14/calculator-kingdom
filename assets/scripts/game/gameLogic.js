@@ -18,10 +18,7 @@ const newGame = function (cardsInPlayerDeck) {
     .then((response) => {
       gameState.setCardLookupTable(response.cards)
       if (cardsInPlayerDeck !== undefined && cardsInPlayerDeck !== null && cardsInPlayerDeck.length > 0) {
-        cardsInPlayerDeck.forEach(cardId => {
-          const cardToAdd = gameState.getCardLookupTable().find(card => card.id === cardId)
-          gameState.setPlayerDeck(cardToAdd)
-        })
+        gameState.setPlayerDeck(cardsInPlayerDeck)
       } else {
         gameState.setPlayerDeck(gameState.getCardLookupTable())
       }

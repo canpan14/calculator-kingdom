@@ -51,7 +51,9 @@ const addCardToDeck = function (left, right, selected) {
 }
 
 const removeCardFromDeck = function (left, right, selected) {
-  console.log(selected)
+  return api.removeCardFromDeck($(selected[0]).data('cid'))
+    .then(ui.removeCardSuccess)
+    .catch(ui.removeCardFailure)
 }
 
 const onSaveDeck = function (event) {

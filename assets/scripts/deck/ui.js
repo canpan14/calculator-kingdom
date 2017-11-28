@@ -27,17 +27,18 @@ const showDeckManagement = function (response) {
   sharedUI.clearAllViews()
   const cardsInDeck = deck.cards
   const cardsNotInDeck = []
+  deck.cards.forEach(card => {
+    card.cardInDeckId = deck.cards_in_deck.find(cid => cid.card_id === card.id).id
+  })
   return gameApi.getCards()
     .then((getCardsResponse) => {
       cardsDb = getCardsResponse.cards
       cardsDb.forEach(card => {
-        if (cardsInDeck.includes(card)) {
-          cardsInDeck.push(card)
-        } else {
+        if (!cardsInDeck.find(cid => cid.id === card.id)) {
           cardsNotInDeck.push(card)
         }
       })
-      $('#decksView').append(deckManagementHbs({deck: deck}))
+      $('#decksView').append(deckManagementHbs({ deck: deck }))
       $('#multiselect').append(cardOptionHbs({ cards: cardsNotInDeck }))
     })
 }

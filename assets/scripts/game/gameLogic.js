@@ -7,6 +7,7 @@ const calcState = require('./calcState')
 const gameState = require('./gameState')
 
 const _maxHandSize = 6
+const _minTypesInDeck = 4
 
 const newGame = function (cardsInPlayerDeck) {
   gameState.clearState()
@@ -18,6 +19,11 @@ const newGame = function (cardsInPlayerDeck) {
     .then((response) => {
       gameState.setCardLookupTable(response.cards)
       if (cardsInPlayerDeck !== undefined && cardsInPlayerDeck !== null && cardsInPlayerDeck.length > 0) {
+        if (cardsInPlayerDeck.length < 4) {
+          for (let i = cardsInPlayerDeck.length; i < _minTypesInDeck; i++) {
+            gameState.setPlayerDeck(gameState.getCardLookupTable()[Math.floor(Math.random() * gameState.getCardLookupTable().length)])
+          }
+        }
         gameState.setPlayerDeck(cardsInPlayerDeck)
       } else {
         gameState.setPlayerDeck(gameState.getCardLookupTable())

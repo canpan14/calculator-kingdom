@@ -32,6 +32,8 @@ const initializeGamePage = function (cardsInDeck) {
           } else {
             ui.gameOver('enemy win')
           }
+          $('#postGamePlayAgain').on('click', () => initializeGamePage(gameState.getPlayerDeck()))
+          $('#postGameMainMenu').on('click', ui.goToMainMenu)
         }
         $('.playingCard').unbind('click')
         $('.playingCard').on('click', (event) => {

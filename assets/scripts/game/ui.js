@@ -144,6 +144,11 @@ const gameOver = function (whoWon) {
   $('#gameResult').collapse('show')
 }
 
+const goToMainMenu = function () {
+  sharedUI.clearAllViews()
+  $('#home').click()
+}
+
 module.exports = {
   initGameView,
   displayCard,
@@ -155,5 +160,6 @@ module.exports = {
   addCardToPlayerField,
   addCardToEnemyField,
   updateHealthValues,
-  gameOver
+  gameOver,
+  goToMainMenu
 }

@@ -4,7 +4,9 @@ const decksViewHbs = require('../templates/decksView.handlebars')
 const deckManagementHbs = require('../templates/deckManagement.handlebars')
 const noDecksHbs = require('../templates/noDecks.handlebars')
 const cardOptionHbs = require('../templates/cardOption.handlebars')
+const viewCardHbs = require('../templates/viewCard.handlebars')
 
+const _ = require('lodash')
 const gameApi = require('../game/api')
 const sharedUI = require('../shared/ui')
 let cardsDb = []
@@ -77,6 +79,28 @@ const removeCardFailure = function () {
   return false
 }
 
+const viewSelectedCard = function (selectedCard) {
+  console.log(selectedCard)
+  $('#cardView').empty()
+  gameApi.getCard(selectedCard.value)
+    .then(response => {
+      switch (response.card.card_type) {
+        case 'attack':
+          response.card.backColor = '#ffcccccc'
+          break
+        case 'defense':
+          response.card.backColor = '#ccccff'
+          break
+      }
+      response.card.card_type = _.capitalize(response.card.card_type)
+      $('#cardView').append(viewCardHbs(response.card))
+      $('#cardViewModal').modal('show')
+    })
+    .catch(() => {
+      sharedUI.failureNotification('Failed to view card, try again later.')
+    })
+}
+
 module.exports = {
   showDecksView,
   getDecksFailure,
@@ -87,5 +111,6 @@ module.exports = {
   addCardSuccess,
   addCardFailure,
   removeCardSuccess,
-  removeCardFailure
+  removeCardFailure,
+  viewSelectedCard
 }

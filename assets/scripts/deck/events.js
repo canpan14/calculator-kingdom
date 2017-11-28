@@ -43,16 +43,19 @@ const modifyDeck = function (event, idFromCreation = null) {
       })
       $('#saveDeckForm').on('submit', onSaveDeck)
       $('#multiselect').change(function () {
-        lastOptionClicked = $('#multiselect option:selected')
-        console.log(lastOptionClicked)
+        lastOptionClicked = $('#multiselect option:selected')[0]
       })
       $('#multiselect_to').change(function () {
-        lastOptionClicked = $('#multiselect_to option:selected')
-        console.log(lastOptionClicked)
+        lastOptionClicked = $('#multiselect_to option:selected')[0]
       })
-      // $('#viewCard').on('click')
+      $('#viewCard').on('click', viewSelectedCard)
     })
     .catch(ui.getDeckFailure)
+}
+
+const viewSelectedCard = function () {
+  if (!lastOptionClicked) return
+  ui.viewSelectedCard(lastOptionClicked)
 }
 
 const addCardToDeck = function (left, right, selected) {

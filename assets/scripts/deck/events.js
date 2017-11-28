@@ -4,9 +4,11 @@ const ui = require('./ui')
 const api = require('./api')
 
 let deckCurrentModifying = null
+let lastOptionClicked = null
 
 const showDecksView = function () {
   deckCurrentModifying = null
+  lastOptionClicked = null
   api.getDecks()
     .then(ui.showDecksView)
     .then(() => {
@@ -40,19 +42,34 @@ const modifyDeck = function (event, idFromCreation = null) {
         beforeMoveToLeft: removeCardFromDeck
       })
       $('#saveDeckForm').on('submit', onSaveDeck)
+      $('#multiselect').change(function () {
+        lastOptionClicked = $('#multiselect option:selected')
+        console.log(lastOptionClicked)
+      })
+      $('#multiselect_to').change(function () {
+        lastOptionClicked = $('#multiselect_to option:selected')
+        console.log(lastOptionClicked)
+      })
+      // $('#viewCard').on('click')
     })
     .catch(ui.getDeckFailure)
 }
 
 const addCardToDeck = function (left, right, selected) {
   return api.addCardToDeck(deckCurrentModifying, selected[0].value)
-    .then(ui.addCardSuccess)
+    .then((response) => {
+      $(selected[0]).attr('data-cid', response.cards_in_deck.id)
+      ui.addCardSuccess(response)
+    })
     .catch(ui.addCardFailure)
 }
 
 const removeCardFromDeck = function (left, right, selected) {
-  return api.removeCardFromDeck($(selected[0]).data('cid'))
-    .then(ui.removeCardSuccess)
+  return api.removeCardFromDeck($(selected[0]).attr('data-cid'))
+    .then((response) => {
+      $(selected[0]).removeAttr('data-cid')
+      ui.removeCardSuccess(response)
+    })
     .catch(ui.removeCardFailure)
 }
 

@@ -28,6 +28,7 @@ const showChooseADeck = function (response) {
 const showHelp = function () {
   sharedUI.clearAllViews()
   $('#homeView').append(helpViewHbs())
+  $('#help-content').scrollspy({ target: '#navbar-help' })
 }
 
 const chooseADeckFailure = function () {

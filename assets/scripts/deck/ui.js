@@ -80,7 +80,6 @@ const removeCardFailure = function () {
 }
 
 const viewSelectedCard = function (selectedCard) {
-  console.log(selectedCard)
   $('#cardView').empty()
   gameApi.getCard(selectedCard.value)
     .then(response => {
@@ -101,6 +100,10 @@ const viewSelectedCard = function (selectedCard) {
     })
 }
 
+const deleteDeckFailure = function () {
+  sharedUI.failureNotification('Failed to delete army, try again later.')
+}
+
 module.exports = {
   showDecksView,
   getDecksFailure,
@@ -112,5 +115,6 @@ module.exports = {
   addCardFailure,
   removeCardSuccess,
   removeCardFailure,
-  viewSelectedCard
+  viewSelectedCard,
+  deleteDeckFailure
 }

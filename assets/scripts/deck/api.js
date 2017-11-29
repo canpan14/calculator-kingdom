@@ -79,11 +79,22 @@ const removeCardFromDeck = function (id) {
   })
 }
 
+const deleteDeck = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + 'decks/' + id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   getDecks,
   getDeck,
   createDeck,
   updateDeck,
   addCardToDeck,
-  removeCardFromDeck
+  removeCardFromDeck,
+  deleteDeck
 }

@@ -8,6 +8,8 @@ const gameState = require('./gameState')
 
 const _maxHandSize = 6
 const _minTypesInDeck = 4
+const _minCardsEnemyPlays = 2
+const _maxCardsEnemyPlays = 4
 
 const newGame = function (cardsInPlayerDeck) {
   gameState.clearState()
@@ -72,8 +74,8 @@ const areAllCardsPlayed = function () {
 
 const enemyRandomlyPlayCards = function () {
   const enemyHand = gameState.getEnemyHand()
-  const max = enemyHand.length - 3
-  const min = 2
+  const max = _maxCardsEnemyPlays
+  const min = _minCardsEnemyPlays
   const numberOfCardsToPlay = Math.floor(Math.random() * (max - min)) + min
   for (let i = 0; i < numberOfCardsToPlay; i++) {
     const cardToPlay = enemyHand[Math.floor(Math.random() * enemyHand.length)]

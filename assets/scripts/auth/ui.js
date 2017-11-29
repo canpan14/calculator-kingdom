@@ -42,6 +42,7 @@ const onSignUpFailure = function () {
 }
 
 const onSignOutSuccess = function () {
+  delete store.user
   sharedUI.clearAllViews()
   $('.active-after-signin').hide()
 }

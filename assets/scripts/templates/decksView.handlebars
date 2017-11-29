@@ -14,6 +14,7 @@
       <tr id="{{deck.id}}">
         <td>{{deck.name}}</td>
         <td>{{deck.cardCount}}</td>
+        <td><button data-id="{{deck.id}}" class="btn btn-danger deleteDeck"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
       </tr>
     {{/each}}
   </tbody>

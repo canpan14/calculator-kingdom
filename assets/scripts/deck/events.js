@@ -14,8 +14,16 @@ const showDecksView = function () {
     .then(() => {
       $('#newDeckBtn').on('click', onCreateDeck)
       $('#myDecks > tbody > tr').on('click', modifyDeck)
+      $('.deleteDeck').on('click', onDeleteDeck)
     })
     .catch(ui.getDecksFailure)
+}
+
+const onDeleteDeck = function (event) {
+  event.stopPropagation()
+  api.deleteDeck($(event.currentTarget).data('id'))
+    .then(showDecksView)
+    .catch(ui.deleteDeckFailure)
 }
 
 const onCreateDeck = function () {

@@ -1,61 +1,104 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+# Calculator Kingdom
 
-# browser-template
+Link to website: https://canpan14.github.io/calculator-kingdom/
 
-A template for starting front-end projects. Webpack for `require` system, build
-pipeline, and development server. Boostrap and Handlebars.js included. No
-front-end frameworks included.
+Link to frontend repo: https://github.com/canpan14/calculator-kingdom
 
-## Installation
+Link to backend repo: https://github.com/canpan14/calculator-kingdom-api
 
-1.  [Download](../../archive/master.zip) this template.
-1.  Unzip and rename the template directory.
-1.  Empty [`README.md`](README.md) and fill with your own content.
-1.  Replace all instances of `ga-wdi-boston.browser-template` with the name of your project.
-1.  Move into the new project and `git init`
-1.  Add all of the files in your project with the command `git add -A`
-  -   *Note:* THIS IS THE ONLY TIME YOU SHOULD RUN THIS COMMAND
-1.  Commit all of your files with the command `git commit`
-  -   Your commit title should read `Initial commit`
-1.  Install dependencies with `npm install`.
+Link to backend deploy site: https://calculator-kingdom-api.herokuapp.com/
 
-## Structure
+## What is RPS the RPG?
+Calculator Kingdom is a base concept card game based off of one of my favorite mobile games Calculords. Is this game the player constructs decks, and heads off to battle computer opponents using a calculator and their math skills to put troops into battle to try and defend their kingdom.
 
-Developers should store JavaScript files in [`assets/scripts`](assets/scripts).
-The "manifest" or entry-point is
-[`assets/scripts/index.js`](assets/scripts/index.js). In general, only
-application initialization goes in this file. It's normal for developers to
-start putting all code in this file, but encourage them to break out different
-responsibilities and use the `require` syntax put references where they're
-needed.
+## Gameplay and Features
+- Each user is able to create multiple armies (decks) with various troop types
+- Armies can be managed and altered independently from the barracks
+- Users can also enter battles without a built/completed army and the game will created or fill the army for them
+- Enemies play at random leading to every match being different (it's a feature)
+- A help page is provided to teach the player the base mechanics of the game and how damage calculations are done
 
-Developers should set `config.apiOrigins.production` (and
-`config.apiOrigins.development` if it differs from the default).  With
-`apiOrigins` set, developers may rely on `config.apiOrigin` as the base for API
-URLs.
+## Technologies Used
+Frontend
+- HMTL
+- Javascript
+- SASS, CSS
+- bootstrap 4
+- bootstrap-notify
 
-Developers should store styles in [`assets/styles`](assets/styles) and load them
-from [`assets/styles/index.scss`](assets/styles/index.scss).
+Backend
+- Ruby
+- Rails
+- Heroku
+- Postgres
 
-Developers should use [getFormFields](forms.md) to retrieve form data to send to
-an API.
+## Plans for Future Iterations
+### Spells
+If this wasn't just a fun little POC it would have been the next thing to do. Right now it's a simple stack check game which isn't very compelling since the best move is to always play all your cards. Spells would add that extra dynamic spice that would lead to players wanting to save them and wait until the right time.
 
-To deploy a browser-template based SPA, run `grunt deploy`.
+### Special Abilities
+Units should really have special abilities, not just power/armor. Like spells, it makes the game a lot more interesting and thought provoking.
 
-## Tasks
+### Difficulty Levels
+This actually would be fairly easy to do as the code is set up to do it. Just have a slider/option menu before starting a match that would choose how fast/aggressively the computer plays cards. Right now it's fairly easy on purpose.
 
-Developers should run these often!
+### Missions
+Every good player/ai game has progressive missions to fight different/harder enemies. Helps bring together the game as an actually experience rather than a fun toy.
 
--   `grunt nag` or just `grunt`: runs code quality analysis tools on your code
-    and complains
--   `grunt make-standard`: reformats all your code in the JavaScript Standard Style
--   `grunt <server|serve|s>`: generates bundles, watches, and livereloads
--   `grunt test`: runs any automated tests, depends on `grunt build`
--   `grunt build`: place bundled styles and scripts where `index.html` can find
-    them
+### Animations
+Animations are what draw people into the game just from a glace. Some great games go unnoticed because the art/animations were subpar so people didn't give them a second look. Makes every action feel more important and impactful.
 
-## [License](LICENSE)
+### Number of Each Type of Troop in an Army
+Currently the player just decides what type of troops are in the army and not how many. Obviously in and good deck building that's a little odd. In the future I would make code changes and changes to the deck/management page to allow for the player to control exactly how many of each troop is in a given army.
 
-1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
-1.  All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+### Numbers Deck
+As well as a deck for what troops the player has, the player could also make a deck to control which numbers show up in their calculators. Allows for more fine tuning.
+
+## Front End Development Process
+Unlike past projects the majority of the time was spent developing the calculator/playing card ability before anything else in the project was done.
+
+I didn't consider the project to be a viable option until I completed a working prototype and knew it was something I could work with going forward.
+
+After that was built I creating all the authentication pages and the deck management page.
+
+The deck management page took a while because I had to figure out how to building something workable in a short amount of time that could work as a simple deck manangement tool. I ended up using a two sided select list where items can be moved to the left and right (in/out of the deck). If I did this again I'd do a different UI that is better suited for a deck builder.
+
+After that was completed a built a help page with some simple information about the game. I'd like to have pictures to go along with it in the future.
+
+I'm not too happy with the front end for the reason that it could be coded a lot cleaner. I really just wanted to make a game using the calculator game mechanic but outside of that many improvements could be made across the whole code base.
+
+I am proud of how I managed the html and each individual 'page/view'. I was very good about using handlebars and keeping the DOM clean.
+
+## Back End Development Process
+The backend was very simple for this project. I created a deck table for all the players decks and a cards table to hold the possible cards in the game to start.
+
+At fisrt the deck table had an array of ids that represented which cards where in it but after talked with Chris (teacher) it became clear that a join table holding the relationship between decks and cards was a better idea. After that was created and some rewritting of code on the front end, it made life a lot easier in keeping track of what cards decks had.
+
+## Problem Solving Strategy
+My problem solving strategy is fairly simple.
+If something is clearly breaking:
+- Locate area of code where the break is happening
+  - Using console logs to find where they stop printing what is expected
+  - Read the stack trace for the exact line (not always possible)
+
+If data isn't displaying as expected:
+- Use console logs to chain back print statements until I see where the data differs from what's expected at that point
+- If it's a race condition or something with asynchronous behaviour, check the chaining logic or make sure all API calls and the code that follows are wrapped in promises/thens.
+
+If the UI is broken in some way:
+- Open the inspector and start messing around with display values
+- Look up examples of people doing similar things and see what CSS values they were using or bootstrap code.
+- If things start to get complicated, revert to a simpler form, take a break from it, and start looking at it fresh later.
+
+## Wireframes
+They are from the initial thought of the app: https://imgur.com/a/39H38
+
+## User Stories
+- User can create an account and login
+- User can create decks
+- User can play against an ai opponent using their deck
+- User can player against an ai oppoent using a random deck
+- User can delete decks
+
+## ERD Diagram
+ERD: https://i.imgur.com/OCCxtMe.png

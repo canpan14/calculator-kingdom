@@ -1,38 +1,42 @@
-<h3 class="text-center">{{deck.name}}</h3>
-<form id="saveDeckForm">
-  <input type="hidden" name="deck" value="{{deck.id}}">
-  <div class="row justify-content-center">
-    <div class="form-group">
-      <label>Army Name</label>
-      <input type="text" name="deckName" value="{{deck.name}}" required>
+<div class="row justify-content-center">
+  <div class="col-12 col-md-10 col-lg-8">
+    <h3 class="text-center">{{deck.name}}</h3>
+    <form id="saveDeckForm">
+      <input type="hidden" name="deck" value="{{deck.id}}">
+      <div class="row justify-content-center">
+        <div class="form-group">
+          <label>Army Name</label>
+          <input type="text" name="deckName" value="{{deck.name}}" required>
+        </div>
+      </div>
+      <div class="alert alert-warning" role="alert">
+        <p class="m-0 text-center">Armies with less than four troop types will have random troop types added to them when going into battle.</p>
+      </div>
+      <div class="row justify-content-center mb-2">
+        <div class="col-5 flex-column">
+          <h5 class="text-center">Troop Types</h5>
+          <select name="from" id="multiselect" class="form-control" size="8">
+          </select>
+        </div>
+        <div class="col-1 flex-column m-auto">
+          <button type="button" id="viewCard" class="btn btn-block deck-mng-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+          <button type="button" id="multiselect_rightSelected" class="btn btn-block deck-mng-btn"><i class="fa fa-chevron-right"></i></button>
+          <button type="button" id="multiselect_leftSelected" class="btn btn-block deck-mng-btn"><i class="fa fa-chevron-left"></i></button>
+        </div>
+        <div class="col-5 flex-column">
+          <h5 class="text-center">Current Army</h5>
+          <select name="to" id="multiselect_to" class="form-control" size="8">
+            {{#each deck.cards as |card|}}
+            <option data-cid="{{card.cardInDeckId}}" value="{{card.id}}">{{card.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <button type="submit" class="btn btn-primary col-12 col-md-6 col-xl-5">Save Army</button>
+      </div>
+    </form>
+    <div id="cardView">
     </div>
   </div>
-  <div class="alert alert-warning" role="alert">
-    <p class="m-0 text-center">Armies with less than four troop types will have random troop types added to them when going into battle.</p>
-  </div>
-  <div class="row justify-content-center mb-2">
-    <div class="col-5 flex-column">
-      <h5 class="text-center">Troop Types</h5>
-      <select name="from" id="multiselect" class="form-control" size="8">
-      </select>
-    </div>
-    <div class="col-1 flex-column m-auto">
-      <button type="button" id="viewCard" class="btn btn-block deck-mng-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
-      <button type="button" id="multiselect_rightSelected" class="btn btn-block deck-mng-btn"><i class="fa fa-chevron-right"></i></button>
-      <button type="button" id="multiselect_leftSelected" class="btn btn-block deck-mng-btn"><i class="fa fa-chevron-left"></i></button>
-    </div>
-    <div class="col-5 flex-column">
-      <h5 class="text-center">Current Army</h5>
-      <select name="to" id="multiselect_to" class="form-control" size="8">
-        {{#each deck.cards as |card|}}
-        <option data-cid="{{card.cardInDeckId}}" value="{{card.id}}">{{card.name}}</option>
-        {{/each}}
-      </select>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <button type="submit" class="btn btn-primary col-12 col-md-6 col-xl-5">Save Army</button>
-  </div>
-</form>
-<div id="cardView">
 </div>

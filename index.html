@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Calculator Kingdom</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="https://use.fontawesome.com/2bb4b018e5.js"></script>
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body class="container-fluid p-0">
+      <nav class="active-after-signin navbar navbar-expand-md navbar-light mb-2" style="background-color: #E2CBA1; display: none;">
+        <a class="navbar-brand" href="#"><i class="fa fa-calculator" aria-hidden="true"></i>Calculator Kingdom</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="active-after-signin nav-item active" style="display: none;">
+              <a class="nav-link" href="#" id="home" data-target=".navbar-collapse.show" data-toggle="collapse">Return to the Keep</a>
+            </li>
+            <li class="active-after-signin nav-item" style="display: none;">
+              <a class="nav-link" href="#" id="changePassword" data-target=".navbar-collapse.show" data-toggle="collapse">Change the Locks</a>
+            </li>
+            <li class="active-after-signin nav-item active" style="display: none;">
+              <a class="nav-link" href="#" id="signOut" data-target=".navbar-collapse.show" data-toggle="collapse">Abandon the Kingdom</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div id="authView"></div>
+      <div id="homeView"></div>
+      <div id="gameView"></div>
+      <div id="decksView"></div>
+      <div id="changePasswordView"></div>
+    </body>
+</html>
